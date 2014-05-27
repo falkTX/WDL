@@ -566,6 +566,7 @@ struct HDC__ {
 
 #elif defined(SWELL_TARGET_QT)
 
+#include <QApplication>
 #include <QWidget>
 
 #else

@@ -457,7 +457,127 @@ void SWELL_RunEvents()
 {
   swell_runOSevents();
 }
+#elif defined(SWELL_TARGET_QT)
+static int   q_argc   = 1;
+static char* q_argv[] = { "", 0 };
 
+class EventFilter : public QObject
+{
+public:
+    EventFilter() {}
+    
+protected:
+    bool eventFilter(QObject *obj, QEvent *event)
+    {
+        return QObject::eventFilter(obj, event);
+    }
+};
+
+void SWELL_initargs(int* argc, char*** argv)
+{
+    if (qApp) return;
+    
+    new QApplication(argc ? *argc : q_argc, argv ? *argv : q_argv);
+}
+
+void swell_OSupdateWindowToScreen(HWND hwnd, RECT *rect)
+{
+}
+
+static void swell_destroyOSwindow(HWND hwnd)
+{
+    if (hwnd && hwnd->m_oswidget)
+    {
+      delete hwnd->m_oswidget;
+      hwnd->m_oswidget=NULL;
+  #ifdef SWELL_LICE_GDI
+      delete hwnd->m_backingstore;
+      hwnd->m_backingstore=0;
+  #endif
+    }
+}
+
+static void swell_setOSwindowtext(HWND hwnd)
+{
+    if (hwnd && hwnd->m_oswidget)
+        hwnd->m_oswidget->setWindowTitle(hwnd->m_title ? hwnd->m_title : "");
+}
+
+static void swell_manageOSwindow(HWND hwnd, bool wantfocus)
+{
+    if (!hwnd) return;
+  
+    bool isVis = !!hwnd->m_oswidget;
+    bool wantVis = !hwnd->m_parent && hwnd->m_visible;
+  
+    if (isVis != wantVis)
+    {
+      if (!wantVis) swell_destroyOSwindow(hwnd);
+      else 
+      {
+          // init if needed
+          SWELL_initargs(NULL, NULL);
+
+        {
+          HWND owner = NULL; // hwnd->m_owner;
+  // parent windows dont seem to work the way we'd want, yet, in gdk...
+  /*        while (owner && !owner->m_oswindow)
+          {
+            if (owner->m_parent)  owner = owner->m_parent;
+            else if (owner->m_owner) owner = owner->m_owner;
+          }
+  */
+   
+#if 0
+          RECT r = hwnd->m_position;
+          GdkWindowAttr attr={0,};
+          attr.title = "";
+          attr.event_mask = GDK_ALL_EVENTS_MASK|GDK_EXPOSURE_MASK;
+          attr.x = r.left;
+          attr.y = r.top;
+          attr.width = r.right-r.left;
+          attr.height = r.bottom-r.top;
+          attr.wclass = GDK_INPUT_OUTPUT;
+          attr.window_type = GDK_WINDOW_TOPLEVEL;
+          hwnd->m_oswidget = gdk_window_new(owner ? owner->m_oswindow : NULL,&attr,GDK_WA_X|GDK_WA_Y);
+#endif
+
+          hwnd->m_oswidget = new QWidget(owner ? owner->m_oswidget : NULL);
+
+          if (hwnd->m_oswidget)
+          {
+#if 0
+            gdk_window_set_user_data(hwnd->m_oswindow,hwnd);
+            gdk_window_move_resize(hwnd->m_oswindow,r.left,r.top,r.right-r.left,r.bottom-r.top);
+            if (!wantfocus) gdk_window_set_focus_on_map(hwnd->m_oswindow,false);
+            HWND DialogBoxIsActive();
+            if (!(hwnd->m_style & WS_CAPTION)) 
+            {
+              gdk_window_set_override_redirect(hwnd->m_oswindow,true);
+            }
+            else if (/*hwnd == DialogBoxIsActive() || */ !(hwnd->m_style&WS_THICKFRAME))
+              gdk_window_set_type_hint(hwnd->m_oswindow,GDK_WINDOW_TYPE_HINT_DIALOG); // this is a better default behavior
+#endif
+            hwnd->m_oswidget->show();
+          }
+        }
+      }
+    }
+    if (wantVis) swell_setOSwindowtext(hwnd);
+  
+  //  if (wantVis && isVis && wantfocus && hwnd && hwnd->m_oswindow) gdk_window_raise(hwnd->m_oswindow);
+}
+
+static void swell_runOSevents()
+{
+    if (QApplication* app = qApp)
+        app->processEvents();
+}
+
+void SWELL_RunEvents()
+{
+  swell_runOSevents();
+}
 #else
 void SWELL_initargs(int *argc, char ***argv)
 {
