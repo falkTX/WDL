@@ -496,6 +496,8 @@ HWND__::HWND__(HWND par, int wID, RECT *wndr, const char *label, bool visible, W
      m_menu=NULL;
 #ifdef SWELL_TARGET_GDK
      m_oswindow = 0;
+#elif defined(SWELL_TARGET_QT)
+     m_oswidget = 0;
 #endif
 
 #ifdef SWELL_LICE_GDI
@@ -3700,6 +3702,7 @@ int ListView_GetTopIndex(HWND h)
 }
 BOOL ListView_GetColumnOrderArray(HWND h, int cnt, int* arr)
 {
+  return FALSE;
 }
 BOOL ListView_SetColumnOrderArray(HWND h, int cnt, int* arr)
 {

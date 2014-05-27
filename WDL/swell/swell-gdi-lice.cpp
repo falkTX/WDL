@@ -722,12 +722,12 @@ int DrawText(HDC ctx, const char *buf, int buflen, RECT *r, int align)
   int bgmode = ct->curbkmode;
 
 
-  int clip_x1=max(use_r.left,0), clip_y1 = max(use_r.top,0);
+  int clip_x1=std::max(use_r.left,0), clip_y1 = std::max(use_r.top,0);
   int clip_w=0, clip_h=0;
   if (surface)
   {
-    clip_w = min(use_r.right,surface->getWidth())-clip_x1;
-    clip_h = min(use_r.bottom,surface->getHeight())-clip_y1;
+    clip_w = std::min(use_r.right,surface->getWidth())-clip_x1;
+    clip_h = std::min(use_r.bottom,surface->getHeight())-clip_y1;
     if (clip_w<0)clip_w=0;
     if (clip_h<0)clip_h=0;
   }
