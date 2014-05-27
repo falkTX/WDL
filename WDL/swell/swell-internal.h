@@ -564,6 +564,10 @@ struct HDC__ {
 #include <gdk/gdk.h>
 #include <gdk/gdkkeysyms.h>
 
+#elif defined(SWELL_TARGET_QT)
+
+#include <QWidget>
+
 #else
 // generic 
 
@@ -596,6 +600,8 @@ struct HWND__
 
 #ifdef SWELL_TARGET_GDK
   GdkWindow *m_oswindow;
+#elif defined(SWELL_TARGET_QT)
+  QWidget *m_oswidget;
 #endif
   char *m_title;
 

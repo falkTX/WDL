@@ -57,7 +57,7 @@ void Sleep(int ms)
 
 DWORD GetTickCount()
 {
-  struct timeval tm={0,};
+  struct timeval tm={0,0};
   gettimeofday(&tm,NULL);
   return tm.tv_sec*1000 + tm.tv_usec/1000;
 }
@@ -327,7 +327,7 @@ again:
             }
 #else
 #if 1
-            struct timeval tm={0,};
+            struct timeval tm={0,0};
             gettimeofday(&tm,NULL);
             ts.tv_sec += tm.tv_sec;
             ts.tv_nsec += tm.tv_usec * 1000;
@@ -476,7 +476,7 @@ BOOL SetEvent(HANDLE hand)
         fd_set s;
         FD_ZERO(&s);
         FD_SET(se->socket[0],&s);
-        struct timeval tv={0,};
+        struct timeval tv={0,0};
         if (select(se->socket[0]+1,&s,NULL,NULL,&tv)>0 && FD_ISSET(se->socket[0],&s)) return TRUE; // already set
       }
       char c=0; 
@@ -599,19 +599,19 @@ int WinIntersectRect(RECT *out, RECT *in1, RECT *in2)
   if (in2->bottom <= in2->top) return false;
   
   // left is maximum of minimum of right edges and max of left edges
-  out->left = max(in1->left,in2->left);
-  out->right = min(in1->right,in2->right);
-  out->top=max(in1->top,in2->top);
-  out->bottom = min(in1->bottom,in2->bottom);
+  out->left = std::max(in1->left,in2->left);
+  out->right = std::min(in1->right,in2->right);
+  out->top = std::max(in1->top,in2->top);
+  out->bottom = std::min(in1->bottom,in2->bottom);
   
   return out->right>out->left && out->bottom>out->top;
 }
 void WinUnionRect(RECT *out, RECT *in1, RECT *in2)
 {
-  out->left = min(in1->left,in2->left);
-  out->top = min(in1->top,in2->top);
-  out->right=max(in1->right,in2->right);
-  out->bottom=max(in1->bottom,in2->bottom);
+  out->left = std::min(in1->left,in2->left);
+  out->top = std::min(in1->top,in2->top);
+  out->right = std::max(in1->right,in2->right);
+  out->bottom = std::max(in1->bottom,in2->bottom);
 }
 
 
@@ -879,7 +879,7 @@ DWORD GetModuleFileName(HINSTANCE hInst, char *fn, DWORD nSize)
 
   if (instptr && lastSymbolRequested)
   {
-    Dl_info inf={0,};
+    Dl_info inf={0,0,0,0};
     dladdr(lastSymbolRequested,&inf);
     if (inf.dli_fname)
     {

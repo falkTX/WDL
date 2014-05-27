@@ -36,7 +36,7 @@
 #endif
 
 // for swell*generic
-// #define SWELL_TARGET_GDK
+// #define SWELL_TARGET_GDK (or _QT)
 // #define SWELL_LICE_GDI
 
 #endif
