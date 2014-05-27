@@ -1,6 +1,6 @@
 # QtCreator project file
 
-TARGET   = CarlaPlugin
+TARGET   = Swell
 TEMPLATE = lib
 VERSION  = 1.0
 
