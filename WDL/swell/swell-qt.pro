@@ -25,6 +25,7 @@ SOURCES = \
     swell-ini.cpp \
     swell-appstub-qt.cpp \
     swell-dlg-qt.cpp \
+    swell-gdi-lice.cpp \
     swell-gdi-qt.cpp \ # unused
     swell-kb-qt.cpp \
     swell-menu-qt.cpp \
@@ -34,7 +35,7 @@ SOURCES = \
     swell-wnd-qt.cpp
 
 # lice
-SOURCES_NOT += \
+SOURCES += \
     ../lice/lice.cpp \
     ../lice/lice_arc.cpp \
     ../lice/lice_colorspace.cpp \
@@ -51,7 +52,7 @@ SOURCES_NOT += \
     ../lice/lice_lvg.cpp
 
 # libpng
-SOURCES_NOT += \
+SOURCES += \
     ../libpng/png.c \
     ../libpng/pngerror.c \
     ../libpng/pngget.c \
@@ -65,7 +66,7 @@ SOURCES_NOT += \
     ../libpng/pngtrans.c
 
 # jpeglib
-SOURCES_NOT += \
+SOURCES += \
     ../jpeglib/jcomapi.c \
     ../jpeglib/jdapimin.c \
     ../jpeglib/jdapistd.c \
