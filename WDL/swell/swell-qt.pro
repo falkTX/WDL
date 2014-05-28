@@ -23,19 +23,18 @@ PKGCONFIG = freetype2
 SOURCES = \
     swell.cpp \
     swell-ini.cpp \
-    swell-appstub-generic.cpp \
-    swell-dlg-generic.cpp \
-    swell-gdi-generic.cpp \ # unused
-    swell-kb-generic.cpp \
-    swell-menu-generic.cpp \
-    swell-misc-generic.cpp \
-    swell-miscdlg-generic.cpp \
-    swell-modstub-generic.cpp \ # unused
-    swell-wnd-generic.cpp \
-    swell-gdi-lice.cpp
+    swell-appstub-qt.cpp \
+    swell-dlg-qt.cpp \
+    swell-gdi-qt.cpp \ # unused
+    swell-kb-qt.cpp \
+    swell-menu-qt.cpp \
+    swell-misc-qt.cpp \
+    swell-miscdlg-qt.cpp \
+    swell-modstub-qt.cpp \ # unused
+    swell-wnd-qt.cpp
 
 # lice
-SOURCES += \
+SOURCES_NOT += \
     ../lice/lice.cpp \
     ../lice/lice_arc.cpp \
     ../lice/lice_colorspace.cpp \
@@ -52,7 +51,7 @@ SOURCES += \
     ../lice/lice_lvg.cpp
 
 # libpng
-SOURCES += \
+SOURCES_NOT += \
     ../libpng/png.c \
     ../libpng/pngerror.c \
     ../libpng/pngget.c \
@@ -66,7 +65,7 @@ SOURCES += \
     ../libpng/pngtrans.c
 
 # jpeglib
-SOURCES += \
+SOURCES_NOT += \
     ../jpeglib/jcomapi.c \
     ../jpeglib/jdapimin.c \
     ../jpeglib/jdapistd.c \
@@ -99,7 +98,7 @@ SOURCES += \
     ../jpeglib/jutils.c
 
 # zlib
-SOURCES += \
+SOURCES_NOT += \
     ../zlib/compress.c \
     ../zlib/adler32.c \
     ../zlib/crc32.c \
@@ -119,10 +118,10 @@ HEADERS = \
     swell.h \
     swell-dlggen.h \
     swell-functions.h \
-    swell-gdi-internalpool.h \
     swell-internal.h \
     swell-menugen.h \
     swell-types.h
+#   swell-gdi-internalpool.h
 
 INCLUDEPATH = . .. ../lice
 

@@ -888,6 +888,11 @@ DWORD GetModuleFileName(HINSTANCE hInst, char *fn, DWORD nSize)
     }
   }
   return 0;
+
+#ifndef __APPLE__
+  // set but unused
+  (void)bundleinstptr;
+#endif
 }
 
 #ifdef __APPLE__
