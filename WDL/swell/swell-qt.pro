@@ -99,7 +99,7 @@ SOURCES += \
     ../jpeglib/jutils.c
 
 # zlib
-SOURCES_NOT += \
+SOURCES += \
     ../zlib/compress.c \
     ../zlib/adler32.c \
     ../zlib/crc32.c \
