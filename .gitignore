@@ -1,0 +1,5 @@
+*.pro.user
+*.xz
+
+WDL/build-swell-qt-Desktop-Debug/
+reaper_linux_x86_64/
