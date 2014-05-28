@@ -35,4 +35,16 @@ void EndDialog(HWND wnd, int ret)
 {
 }
 
+void SWELL_InitiateDragDrop(HWND hwnd, RECT* srcrect, const char* srcfn, void (*callback)(const char* dropfn))
+{
+}
+
+void SWELL_InitiateDragDropOfFileList(HWND hwnd, RECT *srcrect, const char **srclist, int srccount, HICON icon)
+{
+}
+
+void SWELL_FinishDragDrop()
+{
+}
+
 #endif

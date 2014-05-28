@@ -40,37 +40,26 @@ HMENU CreatePopupMenuEx(const char *title)
 
 void DestroyMenu(HMENU hMenu)
 {
-    delete hMenu;
 }
 
 int AddMenuItem(HMENU hMenu, int pos, const char *name, int tagid)
 {
-    if (!hMenu) return -1;
-    MENUITEMINFO *inf = (MENUITEMINFO*)calloc(1,sizeof(MENUITEMINFO));
-    inf->wID = tagid;
-    inf->dwTypeData = strdup(name?name:"");
-    hMenu->items.Insert(pos,inf);
     return 0;
 }
 
 HMENU GetSubMenu(HMENU hMenu, int pos)
 {
-    MENUITEMINFO *item = hMenu ? hMenu->items.Get(pos) : NULL;
-    if (item) return item->hSubMenu;
     return 0;
 }
 
 int GetMenuItemCount(HMENU hMenu)
 {
-    if (hMenu) return hMenu->items.GetSize();
     return 0;
 }
 
 int GetMenuItemID(HMENU hMenu, int pos)
 {
-    MENUITEMINFO *item = hMenu ? hMenu->items.Get(pos) : NULL;
-    if (!item || item->hSubMenu) return -1;
-    return item->wID;
+    return -1;
 }
 
 bool SetMenuItemModifier(HMENU hMenu, int idx, int flag, int code, unsigned int mask)
@@ -100,12 +89,10 @@ bool CheckMenuItem(HMENU hMenu, int idx, int chk)
 
 void InsertMenuItem(HMENU hMenu, int pos, BOOL byPos, MENUITEMINFO *mi)
 {
-    
 }
 
 void SWELL_InsertMenu(HMENU menu, int pos, int flag, UINT_PTR idx, const char *str)
 {
-    
 }
 
 BOOL GetMenuItemInfo(HMENU hMenu, int pos, BOOL byPos, MENUITEMINFO *mi)
@@ -134,7 +121,6 @@ int TrackPopupMenu(HMENU hMenu, int flags, int xpos, int ypos, int resvd, HWND h
 
 void SWELL_SetMenuDestination(HMENU menu, HWND hwnd)
 {
-    // only needed for Cocoa
 }
 
 HMENU SWELL_DuplicateMenu(HMENU menu)
@@ -144,23 +130,33 @@ HMENU SWELL_DuplicateMenu(HMENU menu)
 
 BOOL SetMenu(HWND hwnd, HMENU menu)
 {
-    if (!hwnd) return 0;
-    hwnd->m_menu = menu;
-    
-    return TRUE;
+    return FALSE;
 }
 
 HMENU GetMenu(HWND hwnd)
 {
-    if (!hwnd) return 0;
-    return hwnd->m_menu;
+    return 0;
 }
 
 HMENU SWELL_GetCurrentMenu()
 {
-    return NULL; // not osx
+    return NULL;
 }
+
 void SWELL_SetCurrentMenu(HMENU hmenu)
+{
+}
+
+void SWELL_Menu_AddMenuItem(HMENU hMenu, const char *name, int idx, int flags)
+{
+}
+
+int SWELL_GenerateMenuFromList(HMENU hMenu, const void *_list, int listsz)
+{
+    return 0;
+}
+
+void HMENU__::freeMenuItem(void *p)
 {
 }
 

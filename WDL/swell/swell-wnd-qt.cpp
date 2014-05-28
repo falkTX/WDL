@@ -26,8 +26,8 @@
 #ifndef SWELL_PROVIDED_BY_APP
 
 #include "swell.h"
-#include "swell-dlggen.h"
-#include "swell-internal.h"
+//#include "swell-dlggen.h"
+//#include "swell-internal.h"
 
 BOOL ShellExecute(HWND hwndDlg, const char *action,  const char *content1, const char *content2, const char *content3, int blah)
 {
@@ -41,12 +41,10 @@ HWND GetDlgItem(HWND hwnd, int idx)
 
 void ShowWindow(HWND hwnd, int cmd)
 {
-    
 }
 
 void DestroyWindow(HWND hwnd)
 {
-    
 }
 
 BOOL SWELL_GetGestureInfo(LPARAM lParam, GESTUREINFO* gi)
@@ -56,7 +54,6 @@ BOOL SWELL_GetGestureInfo(LPARAM lParam, GESTUREINFO* gi)
 
 void SWELL_HideApp()
 {
-    
 }
 
 BOOL SetDlgItemText(HWND hwnd, int idx, const char *text)
@@ -81,7 +78,6 @@ BOOL GetDlgItemText(HWND hwnd, int idx, char *text, int textlen)
 
 void CheckDlgButton(HWND hwnd, int idx, int check)
 {
-    
 }
 
 int IsDlgButtonChecked(HWND hwnd, int idx)
@@ -91,12 +87,10 @@ int IsDlgButtonChecked(HWND hwnd, int idx)
 
 void EnableWindow(HWND hwnd, int enable)
 {
-    
 }
 
 void SetFocus(HWND hwnd)
 {
-    
 }
 
 HWND GetFocus()
@@ -106,7 +100,6 @@ HWND GetFocus()
 
 void SetForegroundWindow(HWND hwnd)
 {
-    
 }
 
 HWND GetForegroundWindow()
@@ -116,7 +109,6 @@ HWND GetForegroundWindow()
 
 HWND GetCapture()
 {
-    
     return 0;
 }
 
@@ -127,7 +119,6 @@ HWND SetCapture(HWND hwnd)
 
 void ReleaseCapture()
 {
-    
 }
 
 int IsChild(HWND hwndParent, HWND hwndChild)
@@ -157,12 +148,10 @@ HWND FindWindowEx(HWND par, HWND lastw, const char *classname, const char *title
 
 void ClientToScreen(HWND hwnd, POINT *p)
 {
-    
 }
 
 void ScreenToClient(HWND hwnd, POINT *p)
 {
-    
 }
 
 bool GetWindowRect(HWND hwnd, RECT *r)
@@ -172,12 +161,10 @@ bool GetWindowRect(HWND hwnd, RECT *r)
 
 void GetWindowContentViewRect(HWND hwnd, RECT *r)
 {
-    
 }
 
 void GetClientRect(HWND hwnd, RECT *r)
 {
-    
 }
 
 HWND WindowFromPoint(POINT p)
@@ -185,14 +172,8 @@ HWND WindowFromPoint(POINT p)
     return 0;
 }
 
-// WinOffsetRect missing
-// WinSetRect missing
-// WinUnionRect missing
-// WinIntersectRect missing
-
 void SetWindowPos(HWND hwnd, HWND zorder, int x, int y, int cx, int cy, int flags)
 {
-    
 }
 
 int SWELL_SetWindowLevel(HWND hwnd, int newlevel)
@@ -206,7 +187,6 @@ void InvalidateRect(HWND hwnd, RECT *r, int eraseBk)
 
 void UpdateWindow(HWND hwnd)
 {
-    
 }
 
 LONG_PTR GetWindowLong(HWND hwnd, int idx)
@@ -264,15 +244,14 @@ BOOL KillTimer(HWND hwnd, UINT_PTR timerid)
     return FALSE;
 }
 
-
 void ListView_SetExtendedListViewStyleEx(HWND h, int flag, int mask)
 {
 }
 
 void ListView_InsertColumn(HWND h, int pos, const LVCOLUMN *lvc)
 {
-    if (!h || !lvc) return;
 }
+
 bool ListView_DeleteColumn(HWND h, int pos)
 {
     return false;
@@ -284,32 +263,23 @@ void ListView_SetColumn(HWND h, int pos, const LVCOLUMN *lvc)
 
 int ListView_GetColumnWidth(HWND h, int pos)
 {
-    if (!h) return 0;
-    //  if (!v->m_cols || pos < 0 || pos >= v->m_cols->GetSize()) return 0;
-    
-    //  return (int) floor(0.5+[col width]);
     return 0;
 }
 
 int ListView_InsertItem(HWND h, const LVITEM *item)
 {
-    if (!h || !item || item->iSubItem) return 0;
-    
     return 0;
 }
 
 void ListView_SetItemText(HWND h, int ipos, int cpos, const char *txt)
 {
-    if (!h || cpos < 0 || cpos >= 32) return;
-    
 }
+
 bool ListView_SetItem(HWND h, LVITEM *item)
 {
-    if (!item) return false;
-    if (!h) return false;
-    
-    return true;
+    return false;
 }
+
 int ListView_GetNextItem(HWND h, int istart, int flags)
 {
     return -1;
@@ -317,39 +287,29 @@ int ListView_GetNextItem(HWND h, int istart, int flags)
 
 bool ListView_GetItem(HWND h, LVITEM *item)
 {
-    if (!item) return false;
-    if ((item->mask&LVIF_TEXT)&&item->pszText && item->cchTextMax > 0) item->pszText[0]=0;
-    item->state=0;
-    if (!h) return false;
-    
-    return true;
+    return false;
 }
+
 int ListView_GetItemState(HWND h, int ipos, int mask)
 {
-    if (!h) return 0;
-    int flag=0;
-    return flag;
+    return 0;
 }
 
 void ListView_DeleteItem(HWND h, int ipos)
 {
-    if (!h) return;
-    
 }
+
 void ListView_DeleteAllItems(HWND h)
 {
-    if (!h) return;
 }
 
 int ListView_GetSelectedCount(HWND h)
 {
-    if (!h) return 0;
     return 0;
 }
 
 int ListView_GetItemCount(HWND h)
 {
-    if (!h) return 0;
     return 0;
 }
 
@@ -358,6 +318,7 @@ int ListView_GetSelectionMark(HWND h)
     if (!h) return 0;
     return 0;
 }
+
 void ListView_SetColumnWidth(HWND h, int colpos, int wid)
 {
 }
@@ -369,34 +330,30 @@ bool ListView_SetItemState(HWND h, int ipos, int state, int statemask)
 
 void ListView_RedrawItems(HWND h, int startitem, int enditem)
 {
-    if (!h) return;
 }
 
 void ListView_SetItemCount(HWND h, int cnt)
 {
-    if (!h) return;
 }
 
 void ListView_EnsureVisible(HWND h, int i, BOOL pok)
 {
-    if (!h) return;
 }
+
 bool ListView_GetSubItemRect(HWND h, int item, int subitem, int code, RECT *r)
 {
-    if (!h) return false;
     return false;
 }
+
 void ListView_SetImageList(HWND h, HIMAGELIST imagelist, int which)
 {
-    if (!h || !imagelist || which != LVSIL_STATE) return;
-    
 }
 
 int ListView_HitTest(HWND h, LVHITTESTINFO *pinf)
 {
-    if (!h) return -1;
     return -1;
 }
+
 int ListView_SubItemHitTest(HWND h, LVHITTESTINFO *pinf)
 {
     return -1;
@@ -404,13 +361,10 @@ int ListView_SubItemHitTest(HWND h, LVHITTESTINFO *pinf)
 
 void ListView_GetItemText(HWND hwnd, int item, int subitem, char *text, int textmax)
 {
-    LVITEM it={LVIF_TEXT,item,subitem,0,0,text,textmax,0,0};
-    ListView_GetItem(hwnd,&it);
 }
 
 void ListView_SortItems(HWND hwnd, PFNLVCOMPARE compf, LPARAM parm)
 {
-    if (!hwnd) return;
 }
 
 bool ListView_GetItemRect(HWND h, int item, RECT *r, int code)
@@ -427,22 +381,27 @@ int ListView_GetTopIndex(HWND h)
 {
     return 0;
 }
+
 int ListView_GetCountPerPage(HWND h)
 {
-    return 1;
+    return 0;
 }
+
 BOOL ListView_SetColumnOrderArray(HWND h, int cnt, int* arr)
 {
     return FALSE;
 }
+
 BOOL ListView_GetColumnOrderArray(HWND h, int cnt, int* arr)
 {
     return FALSE;
 }
+
 HWND ListView_GetHeader(HWND h)
 {
     return 0;
 }
+
 int Header_GetItemCount(HWND h)
 {
     return 0;
@@ -465,138 +424,116 @@ int SWELL_GetListViewHeaderHeight(HWND h)
 
 int TabCtrl_GetItemCount(HWND hwnd)
 {
-    if (!hwnd) return 0;
-    // todo
     return 0;
 }
 
 BOOL TabCtrl_DeleteItem(HWND hwnd, int idx)
 {
-    if (!hwnd) return 0;
-    // todo
     return 0;
 }
+
 int TabCtrl_InsertItem(HWND hwnd, int idx, TCITEM *item)
 {
-    if (!item || !hwnd) return -1;
-    if (!(item->mask & TCIF_TEXT) || !item->pszText) return -1;
-    
-    return 0; // todo idx
+    return 0;
 }
+
 int TabCtrl_SetCurSel(HWND hwnd, int idx)
 {
-    if (!hwnd) return -1;
-    // todo
-    return 0; 
+    return 0;
 }
 
 int TabCtrl_GetCurSel(HWND hwnd)
 {
-    if (!hwnd) return 0;
-    return 0; // todo
+    return 0;
 }
+
 BOOL TabCtrl_AdjustRect(HWND hwnd, BOOL fLarger, RECT *r)
 {
-    if (!r || !hwnd) return FALSE;
-    
-    // todo
     return FALSE;
 }
 
 HTREEITEM TreeView_InsertItem(HWND hwnd, TV_INSERTSTRUCT *ins)
 {
-    if (!hwnd || !ins) return 0;
-    
     return NULL;
 }
 
 BOOL TreeView_Expand(HWND hwnd, HTREEITEM item, UINT flag)
 {
-    if (!hwnd || !item) return false;
-    
     return TRUE;
-    
 }
 
 HTREEITEM TreeView_GetSelection(HWND hwnd)
 { 
-    if (!hwnd) return NULL;
-    
     return NULL;
-    
 }
 
 void TreeView_DeleteItem(HWND hwnd, HTREEITEM item)
 {
-    if (!hwnd) return;
 }
 
 void TreeView_SelectItem(HWND hwnd, HTREEITEM item)
 {
-    if (!hwnd) return;
-    
 }
 
 BOOL TreeView_GetItem(HWND hwnd, LPTVITEM pitem)
 {
-    if (!hwnd || !pitem || !(pitem->mask & TVIF_HANDLE) || !(pitem->hItem)) return FALSE;
-    
     return TRUE;
 }
 
 BOOL TreeView_SetItem(HWND hwnd, LPTVITEM pitem)
 {
-    if (!hwnd || !pitem || !(pitem->mask & TVIF_HANDLE) || !(pitem->hItem)) return FALSE;
-    
     return TRUE;
 }
 
 HTREEITEM TreeView_HitTest(HWND hwnd, TVHITTESTINFO *hti)
 {
-    if (!hwnd || !hti) return NULL;
-    
-    return NULL; // todo implement
+    return NULL;
 }
 
 BOOL TreeView_SetIndent(HWND hwnd, int indent)
 {
     return FALSE;
 }
+
 HTREEITEM TreeView_GetChild(HWND hwnd, HTREEITEM item)
 {
-    if (!hwnd) return NULL;
     return NULL;
 }
+
 HTREEITEM TreeView_GetNextSibling(HWND hwnd, HTREEITEM item)
 {
-    if (!hwnd) return NULL;
-    
     return NULL;
 }
+
 HTREEITEM TreeView_GetRoot(HWND hwnd)
 {
-    if (!hwnd) return NULL;
     return NULL;
 }
 
 void TreeView_SetBkColor(HWND hwnd, int color)
 {
 }
+
 void TreeView_SetTextColor(HWND hwnd, int color)
 {
 }
+
 void ListView_SetBkColor(HWND hwnd, int color)
 {
 }
+
 void ListView_SetTextBkColor(HWND hwnd, int color)
 {
 }
+
 void ListView_SetTextColor(HWND hwnd, int color)
 {
 }
+
 void ListView_SetGridColor(HWND hwnd, int color)
 {
 }
+
 void ListView_SetSelColors(HWND hwnd, int *colors, int ncolors)
 {
 }
@@ -613,24 +550,18 @@ bool SWELL_ModalWindowRun(void *ctx, int *ret) // returns false and puts retval 
 
 void SWELL_ModalWindowEnd(void *ctx)
 {
-    if (ctx) 
-    {
-    }
 }
 
 void SWELL_CloseWindow(HWND hwnd)
 {
-    DestroyWindow(hwnd);
 }
 
 void SWELL_RegisterCustomControlCreator(SWELL_ControlCreatorProc proc)
 {
-    
 }
 
 void SWELL_UnregisterCustomControlCreator(SWELL_ControlCreatorProc proc)
 {
-    
 }
 
 LRESULT DefWindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
@@ -664,5 +595,171 @@ void SWELL_MessageQueue_Flush()
 void SWELL_MessageQueue_Clear(HWND h)
 {
 }
+
+void SWELL_GetViewPort(RECT *r, const RECT *sourcerect, bool wantWork)
+{
+}
+
+bool OpenClipboard(HWND hwndDlg)
+{
+    return false;
+}
+
+void CloseClipboard()
+{
+}
+
+HANDLE GetClipboardData(UINT type)
+{
+    return 0;
+}
+
+void EmptyClipboard()
+{
+}
+
+void SetClipboardData(UINT type, HANDLE h)
+{
+}
+
+UINT RegisterClipboardFormat(const char *desc)
+{
+    return 0;
+}
+
+UINT EnumClipboardFormats(UINT lastfmt)
+{
+    return 0;
+}
+
+void SetOpaque(HWND h, bool opaque)
+{
+}
+
+BOOL EndPaint(HWND hwnd, PAINTSTRUCT *ps)
+{
+    return TRUE;
+}
+
+int GetSystemMetrics(int p)
+{
+    return 0;
+}
+
+BOOL DragQueryPoint(HDROP hDrop,LPPOINT pt)
+{
+    return FALSE;
+}
+
+void DragFinish(HDROP hDrop)
+{
+}
+
+UINT DragQueryFile(HDROP hDrop, UINT wf, char *buf, UINT bufsz)
+{
+    return 0;
+}
+
+void SWELL_DrawFocusRect(HWND hwndPar, RECT *rct, void **handle)
+{
+}
+
+void SWELL_MakeSetCurParms(float xscale, float yscale, float xtrans, float ytrans, HWND parent, bool doauto, bool dosizetofit)
+{
+}
+
+HWND SWELL_MakeButton(int def, const char *label, int idx, int x, int y, int w, int h, int flags)
+{
+    return 0;
+}
+
+HWND SWELL_MakeEditField(int idx, int x, int y, int w, int h, int flags)
+{
+    return 0;
+}
+
+HWND SWELL_MakeLabel( int align, const char *label, int idx, int x, int y, int w, int h, int flags)
+{
+    return 0;
+}
+
+HWND SWELL_MakeControl(const char *cname, int idx, const char *classname, int style, int x, int y, int w, int h, int exstyle)
+{
+    return 0;
+}
+
+HWND SWELL_MakeCombo(int idx, int x, int y, int w, int h, int flags)
+{
+    return 0;
+}
+
+HWND SWELL_MakeGroupBox(const char *name, int idx, int x, int y, int w, int h, int style)
+{
+    return 0;
+}
+
+HWND SWELL_MakeCheckBox(const char *name, int idx, int x, int y, int w, int h, int flags=0)
+{
+    return 0;
+}
+
+HWND SWELL_MakeListBox(int idx, int x, int y, int w, int h, int styles)
+{
+    return 0;
+}
+
+void SWELL_GenerateDialogFromList(const void *_list, int listsz)
+{
+}
+
+void SWELL_Internal_PostMessage_Init()
+{
+}
+
+void SWELL_SetWindowWantRaiseAmt(HWND h, int  amt)
+{
+}
+
+void SWELL_SetListViewFastClickMask(HWND hList, int mask)
+{
+}
+
+void SWELL_initargs(int *argc, char ***argv) 
+{
+}
+
+void SWELL_RunMessageLoop()
+{
+}
+
+BOOL EnumChildWindows(HWND hwnd, BOOL (*cwEnumFunc)(HWND,LPARAM),LPARAM lParam)
+{
+    return FALSE;
+}
+
+BOOL SWELL_IsGroupBox(HWND hwnd)
+{
+    return FALSE;
+}
+
+BOOL SWELL_IsButton(HWND hwnd)
+{
+    return FALSE;
+}
+
+BOOL SWELL_IsStaticText(HWND hwnd)
+{
+    return FALSE;
+}
+
+void SWELL_GetDesiredControlSize(HWND hwnd, RECT *r)
+{
+}
+
+#ifdef SWELL_LICE_GDI
+void swell_OSupdateWindowToScreen(HWND hwnd, RECT *rect)
+{
+}
+#endif
 
 #endif
