@@ -27,63 +27,77 @@
 #include "swell.h"
 #include "swell-dlggen.h"
 
+#define DBGFUNC printf("%s\n", __PRETTY_FUNCTION__);
+
 SWELL_CursorResourceIndex* SWELL_curmodule_cursorresource_head;
 
 int SWELL_KeyToASCII(int wParam, int lParam, int *newflags)
 {
+    DBGFUNC;
     return 0;
 }
 
 WORD GetAsyncKeyState(int key)
 {
+    DBGFUNC;
     return 0;
 }
 
 void GetCursorPos(POINT *pt)
 {
+    DBGFUNC;
 }
 
 DWORD GetMessagePos()
 {  
+    DBGFUNC;
     return 0;
 }
 
 HCURSOR SWELL_LoadCursor(const char *_idx)
 {
+    DBGFUNC;
     return 0;
 }
 
 void SWELL_SetCursor(HCURSOR curs)
 {
+    DBGFUNC;
 }
 
 HCURSOR SWELL_GetCursor()
 {
+    DBGFUNC;
     return 0;
 }
 
 HCURSOR SWELL_GetLastSetCursor()
 {
+    DBGFUNC;
     return 0;
 }
 
 bool SWELL_IsCursorVisible()
 {
+    DBGFUNC;
     return false;
 }
 
 int SWELL_ShowCursor(BOOL bShow)
 {
+    DBGFUNC;
     return 0;
 }
 
 BOOL SWELL_SetCursorPos(int X, int Y)
 {
+    DBGFUNC;
     return false;
 }
 
 HCURSOR SWELL_LoadCursorFromFile(const char *fn)
 {
+    DBGFUNC;
     return NULL;
 }
 

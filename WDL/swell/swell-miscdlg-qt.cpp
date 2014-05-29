@@ -29,25 +29,47 @@
 
 #include "swell.h"
 
+#include <QMessageBox>
+
+#define DBGFUNC printf("%s\n", __PRETTY_FUNCTION__);
+
 int MessageBox(HWND hwndParent, const char *text, const char *caption, int type)
 {
-    return 0;
+    printf("MessageBox(%p, \"%s\", \"%s\", %i)\n", hwndParent, text, caption, type);
+
+    int ret = 0;
+
+    if (type == MB_OK)
+    {
+        QMessageBox msgBox;
+        msgBox.setWindowTitle(caption);
+        msgBox.setText(text);
+        msgBox.setStandardButtons(QMessageBox::Ok);
+        msgBox.setDefaultButton(QMessageBox::Ok);
+        msgBox.exec();
+        ret = IDOK;
+    }
+
+    return ret;
 }
 
 char *BrowseForFiles(const char *text, const char *initialdir, 
                      const char *initialfile, bool allowmul, const char *extlist)
 {
+    DBGFUNC;
     return NULL;
 }
 
 bool BrowseForSaveFile(const char *text, const char *initialdir, const char *initialfile, const char *extlist,
                        char *fn, int fnsize)
 {
+    DBGFUNC;
     return false;
 }
 
 bool BrowseForDirectory(const char *text, const char *initialdir, char *fn, int fnsize)
 {
+    DBGFUNC;
     return false;
 }
 
