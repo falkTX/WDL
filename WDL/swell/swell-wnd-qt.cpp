@@ -30,6 +30,7 @@
 #include "swell-internal.h"
 
 #include "../mutex.h"
+#include "../wdlcstring.h"
 
 #define DBGFUNC printf("%s\n", __PRETTY_FUNCTION__);
 
@@ -833,22 +834,63 @@ int GetSystemMetrics(int p)
     return 0;
 }
 
+//---------------------------------------------------------------------------------------------------------------------------
+// copied from swell-wnd.mm
+// the same code is on swell-wnd-generic.cpp
+
 BOOL DragQueryPoint(HDROP hDrop,LPPOINT pt)
 {
-    DBGFUNC;
-    return FALSE;
+    if (!hDrop) return 0;
+    DROPFILES *df=(DROPFILES*)GlobalLock(hDrop);
+    BOOL rv=!df->fNC;
+    *pt=df->pt;
+    GlobalUnlock(hDrop);
+    return rv;
 }
 
 void DragFinish(HDROP hDrop)
 {
-    DBGFUNC;
+    //do nothing for now (caller will free hdrops)
 }
 
 UINT DragQueryFile(HDROP hDrop, UINT wf, char *buf, UINT bufsz)
 {
-    DBGFUNC;
-    return 0;
+    if (!hDrop) return 0;
+    DROPFILES *df=(DROPFILES*)GlobalLock(hDrop);
+    
+    UINT rv=0;
+    char *p=(char*)df + df->pFiles;
+    if (wf == 0xFFFFFFFF)
+    {
+        while (*p)
+        {
+            rv++;
+            p+=strlen(p)+1;
+        }
+    }
+    else
+    {
+        while (*p)
+        {
+            if (!wf--)
+            {
+                if (buf)
+                {
+                    lstrcpyn_safe(buf,p,bufsz);
+                    rv=strlen(buf);
+                }
+                else rv=strlen(p);
+                
+                break;
+            }
+            p+=strlen(p)+1;
+        }
+    }
+    GlobalUnlock(hDrop);
+    return rv;
 }
+
+//---------------------------------------------------------------------------------------------------------------------------
 
 void SWELL_DrawFocusRect(HWND hwndPar, RECT *rct, void **handle)
 {
@@ -908,9 +950,50 @@ HWND SWELL_MakeListBox(int idx, int x, int y, int w, int h, int styles)
     return 0;
 }
 
+//---------------------------------------------------------------------------------------------------------------------------
+// copied from swell-wnd.mm
+
 void SWELL_GenerateDialogFromList(const void *_list, int listsz)
 {
-    DBGFUNC;
+#define SIXFROMLIST list->p1,list->p2,list->p3, list->p4, list->p5, list->p6
+    SWELL_DlgResourceEntry *list = (SWELL_DlgResourceEntry*)_list;
+    while (listsz>0)
+    {
+        if (!strcmp(list->str1,"__SWELL_BUTTON"))
+        {
+            SWELL_MakeButton(list->flag1,list->str2, SIXFROMLIST);
+        } 
+        else if (!strcmp(list->str1,"__SWELL_EDIT"))
+        {
+            SWELL_MakeEditField(SIXFROMLIST);
+        }
+        else if (!strcmp(list->str1,"__SWELL_COMBO"))
+        {
+            SWELL_MakeCombo(SIXFROMLIST);
+        }
+        else if (!strcmp(list->str1,"__SWELL_LISTBOX"))
+        {
+            SWELL_MakeListBox(SIXFROMLIST);
+        }
+        else if (!strcmp(list->str1,"__SWELL_GROUP"))
+        {
+            SWELL_MakeGroupBox(list->str2,SIXFROMLIST);
+        }
+        else if (!strcmp(list->str1,"__SWELL_CHECKBOX"))
+        {
+            SWELL_MakeCheckBox(list->str2,SIXFROMLIST);
+        }
+        else if (!strcmp(list->str1,"__SWELL_LABEL"))
+        {
+            SWELL_MakeLabel(list->flag1, list->str2, SIXFROMLIST);
+        }
+        else if (*list->str2)
+        {
+            SWELL_MakeControl(list->str1, list->flag1, list->str2, SIXFROMLIST);
+        }
+        listsz--;
+        list++;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------------
@@ -945,7 +1028,7 @@ void SWELL_initargs(int* argc, char*** argv)
     DBGFUNC;
     
     if (qApp) return;
-
+    
     new QApplication(*argc, *argv);
 }
 
