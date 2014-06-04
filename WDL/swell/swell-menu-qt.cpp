@@ -208,9 +208,4 @@ int SWELL_GenerateMenuFromList(HMENU hMenu, const void *_list, int listsz)
     return 0;
 }
 
-void HMENU__::freeMenuItem(void *p)
-{
-    DBGFUNC;
-}
-
 #endif

@@ -569,12 +569,55 @@ struct HDC__ {
 #include <QApplication>
 #include <QWidget>
 
+class SwellWidget : public QWidget
+{
+public:
+    SwellWidget(QWidget* parent = NULL)
+        : QWidget(parent)
+    {
+        
+    }
+
+    ~SwellWidget()
+    {
+    }
+};
+
+struct HGDIOBJ__
+{
+  int type;
+  int additional_refcnt; // refcnt of 0 means one owner (if >0, additional owners)
+
+  // used by pen/brush
+  int color;
+  int wid;
+
+  bool _infreelist;
+  struct HGDIOBJ__ *_next;
+};
+
+struct HDC__ {
+  void *ownedData; // always use via SWELL_GetContextFrameBuffer() (which performs necessary alignment)
+  HGDIOBJ__ *curpen;
+  HGDIOBJ__ *curbrush;
+  HGDIOBJ__ *curfont;
+
+  int cur_text_color_int; // text color as int
+
+  int curbkcol;
+  int curbkmode;
+  float lastpos_x,lastpos_y;
+
+  bool _infreelist;
+  struct HDC__ *_next;
+};
+
 #else
 // generic 
 
 #endif // end generic
 
-#ifndef SWELL_TARGET_OSX 
+#if ! (defined(SWELL_TARGET_OSX) || defined(SWELL_TARGET_QT))
 
 #ifdef SWELL_LICE_GDI
 #include "../lice/lice.h"
